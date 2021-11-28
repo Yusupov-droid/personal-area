@@ -18,3 +18,15 @@ export const FormGroup: React.FC = (props) => {
         </div>
     );
 };
+
+type FormErrorMessageProps = {
+    touched?: boolean;
+    message?: string;
+}
+export const FormErrorMessage: React.FC<FormErrorMessageProps> = (props) => {
+    return (
+        <div className='form__error'>
+            {(props.touched && props.message) || props.message}
+        </div>
+    );
+};
