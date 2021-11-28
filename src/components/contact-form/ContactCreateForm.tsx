@@ -3,7 +3,7 @@ import { useContact } from '../../hooks/use-contact';
 
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
-import { Form, FormGroup } from '../form/Form';
+import { Form, FormErrorMessage, FormGroup } from '../form/Form';
 import { useFormik } from 'formik';
 import { ContactUpdateAndCreateSchema } from '../../validation-schemas';
 
@@ -35,7 +35,7 @@ const ContactCreateForm: React.FC<Props> = (props) => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.name && formik.touched.name ? <div>{formik.errors.name}</div> : null}
+                <FormErrorMessage touched={formik.touched.name} message={formik.errors.name} />
             </FormGroup>
             <FormGroup>
                 <Input
@@ -46,7 +46,7 @@ const ContactCreateForm: React.FC<Props> = (props) => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.phone && formik.touched.phone ? <div>{formik.errors.phone}</div> : null}
+                <FormErrorMessage touched={formik.touched.phone} message={formik.errors.phone} />
             </FormGroup>
             <FormGroup>
                 <Button type='submit' role={'primary'}>Создать</Button>

@@ -3,7 +3,7 @@ import React from 'react';
 
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
-import { Form, FormGroup } from '../form/Form';
+import { Form, FormErrorMessage, FormGroup } from '../form/Form';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { LoginSchema } from '../../validation-schemas';
@@ -33,7 +33,7 @@ const LoginForm = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
+                <FormErrorMessage touched={formik.touched.email} message={formik.errors.email} />
             </FormGroup>
             <FormGroup>
                 <Input
@@ -43,7 +43,7 @@ const LoginForm = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
+                <FormErrorMessage touched={formik.touched.password} message={formik.errors.password} />
             </FormGroup>
             <FormGroup>
                 <Button type='submit' role={'primary'}>

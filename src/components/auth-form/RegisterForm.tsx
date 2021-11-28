@@ -1,12 +1,13 @@
 import { useAuth } from '../../hooks/use-auth';
 
-import { Form, FormGroup } from '../form/Form';
+import { Form, FormErrorMessage, FormGroup } from '../form/Form';
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import { RegisterSchema } from '../../validation-schemas';
+import React from 'react';
 
 
 const RegisterForm = () => {
@@ -35,7 +36,7 @@ const RegisterForm = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.name && formik.touched.name ? <div>{formik.errors.name}</div> : null}
+                <FormErrorMessage touched={formik.touched.name} message={formik.errors.name} />
             </FormGroup>
             <FormGroup>
                 <Input
@@ -46,7 +47,7 @@ const RegisterForm = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
+                <FormErrorMessage touched={formik.touched.email} message={formik.errors.email} />
             </FormGroup>
             <FormGroup>
                 <Input
@@ -57,7 +58,7 @@ const RegisterForm = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                 />
-                {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
+                <FormErrorMessage touched={formik.touched.password} message={formik.errors.password} />
             </FormGroup>
             <FormGroup>
                 <Button type='submit' role={'primary'}>
