@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IContactDTO } from '../../api/contacts/contact.service';
 import { useContact } from '../../hooks/use-contact';
 import { Form, FormGroup } from '../form/Form';
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
+import { useFormik } from 'formik';
+import { ContactUpdateAndCreateSchema } from '../../validation-schemas';
 
 type Props = {
     closeHandler: () => void
@@ -12,35 +14,44 @@ type Props = {
 const ContactUpdateForm: React.FC<Props> = (props) => {
     const { update } = useContact();
 
-    const [name, setName] = useState(props.contactForUpdate.name);
-    const [phone, setPhone] = useState(props.contactForUpdate.phone);
-
-
-
-    const onSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        update(props.contactForUpdate.id, { name, phone });
-        props.closeHandler();
-    };
+    const formik = useFormik({
+        initialValues: {
+            name: props.contactForUpdate.name,
+            phone: props.contactForUpdate.phone,
+        },
+        validationSchema: ContactUpdateAndCreateSchema,
+        onSubmit: ({ name, phone }) => {
+            update(props.contactForUpdate.id, { name, phone });
+            props.closeHandler();
+        },
+    });
 
     return (
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <Input
-                    value={name}
+                    type='text'
+                    name='name'
+                    value={formik.values.name}
                     placeholder={'Введите имя.'}
-                    onChange={(e) => setName(e.target.value)}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.errors.name && formik.touched.name ? <div>{formik.errors.name}</div> : null}
             </FormGroup>
             <FormGroup>
                 <Input
-                    value={phone}
+                    type='text'
+                    name='phone'
+                    value={formik.values.phone}
                     placeholder={'Введите номер телефона.'}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.errors.phone && formik.touched.phone ? <div>{formik.errors.phone}</div> : null}
             </FormGroup>
             <FormGroup>
-                <Button role={'primary'}>Обновить</Button>
+                <Button type='submit' role={'primary'}>Обновить</Button>
             </FormGroup>
         </Form>
     );

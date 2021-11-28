@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useContact } from '../../hooks/use-contact';
 
 import Input from '../UI/input/Input';
 import Button from '../UI/button/Button';
 import { Form, FormGroup } from '../form/Form';
+import { useFormik } from 'formik';
+import { ContactUpdateAndCreateSchema } from '../../validation-schemas';
 
 type Props = {
     closeHandler: () => void
@@ -11,33 +13,43 @@ type Props = {
 const ContactCreateForm: React.FC<Props> = (props) => {
     const { create } = useContact();
 
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-
-    const onSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        create({ name, phone });
-        props.closeHandler();
-    };
-
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            phone: '',
+        },
+        validationSchema: ContactUpdateAndCreateSchema,
+        onSubmit: ({ name, phone }) => {
+            create({ name, phone });
+            props.closeHandler();
+        },
+    });
     return (
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <Input
-                    value={name}
+                    type='text'
+                    name='name'
+                    value={formik.values.name}
                     placeholder={'Введите имя.'}
-                    onChange={(e) => setName(e.target.value)}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.errors.name && formik.touched.name ? <div>{formik.errors.name}</div> : null}
             </FormGroup>
             <FormGroup>
                 <Input
-                    value={phone}
+                    type='text'
+                    name='phone'
+                    value={formik.values.phone}
                     placeholder={'Введите номер телефона.'}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                 />
+                {formik.errors.phone && formik.touched.phone ? <div>{formik.errors.phone}</div> : null}
             </FormGroup>
             <FormGroup>
-                <Button role={'primary'}>СОЗДАТЬ</Button>
+                <Button type='submit' role={'primary'}>Создать</Button>
             </FormGroup>
         </Form>
     );
