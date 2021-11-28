@@ -1,0 +1,13 @@
+@import "../../../sass/mixins";
+
+.input{
+  width: 100%;
+  font-size: 16px;
+  padding: 0 5px;
+  height: 40px;
+  border-radius: 5px;
+  &::placeholder{
+    color: #9CA3AF;
+  }
+  @include base-outline(#e1e1e1, #80a3b6)
+}

@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "94dea1d5-973d-43b1-997e-fc5b625b52a4",
+      "name": "Jamshid",
+      "email": "demo@mail.com",
+      "password": "$2b$05$DuA5OhssoT7gqpeFx5m/S.KsKk.9VeRduALS.Qd1je7BAhmWpOesy"
+    }
+  ],
+  "contacts": []
+}

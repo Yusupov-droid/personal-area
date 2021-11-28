@@ -1,0 +1,10 @@
+@mixin base-outline($border-color, $box-shadow) {
+  outline: none;
+  border: 2px solid $border-color;
+  transition: all 0.3s;
+  &:focus,
+  &:hover {
+    box-shadow: $box-shadow 0 0 0 3px;
+  }
+}
+

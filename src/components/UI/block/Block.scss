@@ -1,0 +1,12 @@
+.block {
+  background: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+
+  &__inner {
+    padding: 10px;
+  }
+}
+.block--space{
+  margin-bottom: 20px;
+}

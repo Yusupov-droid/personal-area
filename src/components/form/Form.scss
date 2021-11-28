@@ -1,0 +1,13 @@
+.form {
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  &__group {
+    margin-bottom: 15px;
+  }
+
+  &__group:last-of-type {
+    margin-bottom: 0
+  }
+}

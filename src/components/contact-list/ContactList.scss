@@ -1,0 +1,23 @@
+.contact-list {
+  &__inner {
+  }
+
+  &__toolbox {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__tool + &__tool {
+    margin-left: 20px;
+  }
+  &__content{
+    background: #d2d2d2;
+    padding: 5px;
+    margin: 10px 0px;
+    border-radius: 5px;
+  }
+  &__item {
+    margin-bottom: 10px;
+  }
+
+}
