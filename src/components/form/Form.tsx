@@ -26,7 +26,7 @@ type FormErrorMessageProps = {
 export const FormErrorMessage: React.FC<FormErrorMessageProps> = (props) => {
     return (
         <div className='form__error'>
-            {(props.touched && props.message) || props.message}
+            {(props.touched && props.message) && props.message}
         </div>
     );
 };
