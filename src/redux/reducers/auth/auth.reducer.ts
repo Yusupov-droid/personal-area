@@ -32,6 +32,8 @@ export const AuthReducer = (state: AuthState = InitialState, action: AuthAction)
         case AUTH_INIT:
             return {
                 ...state,
+                error: false,
+                errorMessage: '',
                 user: action.payload.user,
             };
         case AUTH_LOGOUT:
@@ -53,6 +55,8 @@ export const AuthReducer = (state: AuthState = InitialState, action: AuthAction)
         case AUTH_REQUEST_SUCCESS:
             return {
                 ...state,
+                error: false,
+                errorMessage: '',
                 user: action.payload.user,
             };
         default:
